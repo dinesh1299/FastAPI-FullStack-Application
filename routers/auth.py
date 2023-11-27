@@ -72,7 +72,6 @@ async def get_user(request:Request):
 
 @router.post('/token')
 async def auth_token(response:Response,form_data:OAuth2PasswordRequestForm=Depends(),db:Session=Depends(get_db)):
-    print(form_data.username)
     user= authenticate_user(form_data.username,form_data.password,db)
     if user:
         token = create_token(user.username,user.id,user.role,timedelta(minutes=60))
